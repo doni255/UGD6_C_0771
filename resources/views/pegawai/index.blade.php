@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Departemen</h1>
+                    <h1 class="m-0">Pegawai</h1>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
@@ -30,6 +30,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            <a href="{{ route('pegawai.create') }}" class="btn btn-md btn-success mb-3">TAMBAH PEGAWAI</a>
                             <div class="table-responsive p-0">
                                 <table class="table table-hover text-nowrap">
                                     <thead>
@@ -41,6 +42,7 @@
                                             <th class="text-center">Telepon</th>
                                             <th class="text-center">Gender</th>
                                             <th class="text-center">Status</th>
+                                            <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -73,6 +75,14 @@
                                             @else
                                             <td class="text-center">Tidak Aktif</td>
                                             @endif
+                                            <td>
+                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pegawai.destroy', $item->id) }}" method="POST">
+                                            <a href="{{ route('pegawai.edit', $item->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                         @empty
                                         <div class="alert alert-danger">
